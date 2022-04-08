@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Talks } from 'src/app/models/Talks';
-import { URL } from 'src/app/shared/contants';
+import { URL } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-talks',
