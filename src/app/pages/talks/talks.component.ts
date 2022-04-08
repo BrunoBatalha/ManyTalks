@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Talks } from 'src/app/models/Talks';
+import { URL } from 'src/app/shared/contants';
 
 @Component({
   selector: 'app-talks',
@@ -7,6 +8,7 @@ import { Talks } from 'src/app/models/Talks';
   styleUrls: []
 })
 export class TalksComponent {
+  urlChat: string = URL.CHAT;
   teste: string = "";
   talks: Talks[] = [
     {
