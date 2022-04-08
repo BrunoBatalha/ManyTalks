@@ -10,7 +10,7 @@ import { URL } from 'src/app/shared/constants';
 export class TalksComponent {
   urlChat: string = URL.CHAT;
   teste: string = "";
-  talks: Talks[] = [
+  talks: Talks[] = [ 
     {
       toPerson: "Bruno",
       id: "1"
