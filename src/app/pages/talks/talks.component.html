@@ -1,8 +1,10 @@
-<input [(ngModel)]="teste" />
+<h1>{{currentUser?.username}}</h1>
+
+<input [(ngModel)]="usernameToTalk" />
 <button (click)="createTalk()">Talk to</button>
 
 <ul>
-    <li *ngFor="let talk of talks; trackBy: trackByTalks">
-        <a [routerLink]=[urlChat]>{{talk.toPerson}}</a>
+    <li *ngFor="let talk of talks; trackBy: trackByTalks ">
+        <a [routerLink]=[urlChat]>{{talk}}</a>
     </li>
 </ul>
