@@ -1,4 +1,4 @@
 export interface UserTalk {
-	talkKey: string;
-	userKey: string;
+	// key?: string;
+	[k: string]: string | null | undefined;
 }
