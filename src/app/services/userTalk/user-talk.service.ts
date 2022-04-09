@@ -28,17 +28,17 @@ export class UserTalkService extends BaseService<Talk> {
 		});
 	}
 
-	filterUserTalksByKey(userKey: string | undefined): Observable<string[]> {
+	filterByUserKey(userKey: string | undefined): Observable<string[]> {
 		return new Observable((subscriber): void => {
-			this.filterBy('/userTalks', userKey, '_userKey_').subscribe((snap): void => {
+			this.filterBy('userTalks', userKey, '_userKey_').subscribe((snap): void => {
 				subscriber.next(snap.map((s) => s.key as string));
 			});
 		});
 	}
 
-	getUserTalk(userKey: string | undefined, userKey2: string | undefined): Observable<string | null> {
+	getKeyByUserKeys(userKey: string | undefined, userKey2: string | undefined): Observable<string | null> {
 		return new Observable((subscriber): void => {
-			this.filterBy('/userTalks', userKey, '_userKey_').subscribe((snap): void => {
+			this.filterBy('userTalks', userKey, '_userKey_').subscribe((snap): void => {
 				if (snap.length > 0) {
 					const userTalk = snap.find(
 						(s) => (s.payload.val() as { [g: string]: string })[userKey2 as string] === '_userKey_'

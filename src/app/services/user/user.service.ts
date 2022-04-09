@@ -10,6 +10,10 @@ import { BaseService } from '../base.service';
 	providedIn: 'root',
 })
 export class UserService extends BaseService<User> {
+	private usersPrivatePath = 'users/private';
+	private usersPublicPath = 'users/public';
+	private userStorage = 'user';
+
 	constructor(database: AngularFireDatabase, private storageService: StorageService) {
 		super(database);
 	}
@@ -22,8 +26,8 @@ export class UserService extends BaseService<User> {
 				...user,
 			};
 			const pathsToUpdate = {
-				[`users/private/${userKey}`]: userPrivate,
-				[`users/public/${userKey}`]: user,
+				[`${this.usersPrivatePath}/${userKey}`]: userPrivate,
+				[`${this.usersPublicPath}/${userKey}`]: user,
 			};
 
 			this.updateMany(pathsToUpdate).then((): void => {
@@ -33,14 +37,18 @@ export class UserService extends BaseService<User> {
 	}
 
 	isLogged(): boolean {
-		return !!this.storageService.get('user');
+		return !!this.storageService.get(this.userStorage);
 	}
 
 	saveInStorage(user: User): boolean {
-		return this.storageService.set('user', user);
+		return this.storageService.set(this.userStorage, user);
 	}
 
-	getFromStorage(): User {
-		return this.storageService.get('user') as User;
+	getFromStorage(): User | null {
+		const user = this.storageService.get(this.userStorage);
+		if (user == null) {
+			return null;
+		}
+		return user as User;
 	}
 }
