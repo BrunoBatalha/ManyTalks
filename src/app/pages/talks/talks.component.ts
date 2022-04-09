@@ -38,7 +38,7 @@ export class TalksComponent implements OnInit {
 		} else {
 			this.userPublicService.getUserByKey(loggedUser.key).subscribe((user) => {
 				if (user != null) {
-					this.currentUser = loggedUser;
+					this.setUser(loggedUser);
 				} else {
 					this.createUser();
 				}
@@ -54,7 +54,7 @@ export class TalksComponent implements OnInit {
 		this.userService.insertUser(user).subscribe((user): void => {
 			const isSaved = this.userService.saveInStorage(user);
 			if (isSaved) {
-				this.currentUser = user;
+				this.setUser(user);
 			}
 		});
 	}
@@ -94,6 +94,11 @@ export class TalksComponent implements OnInit {
 					}
 				},
 			});
+	}
+
+	setUser(user: User): void {
+		this.currentUser = user;
+		this.listTalks();
 	}
 
 	listTalks(): void {
