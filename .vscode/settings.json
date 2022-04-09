@@ -1,0 +1,16 @@
+{
+    "editor.codeActionsOnSave": [
+        "source.addMissingImports",
+        "source.fixAll.eslint",
+        "source.organizeImports",    
+    ],
+    "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+    "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
+    "typescript.inlayHints.variableTypes.enabled": true,
+    "typescript.inlayHints.parameterTypes.enabled": true,
+
+     // extension TsAutoReturnType
+    "tsautoreturntype.inferArrowFunctionReturnType": true,
+    "tsautoreturntype.inferFunctionReturnType": true,
+    "tsautoreturntype.inferMethodReturnType": true
+}
