@@ -1,3 +1,7 @@
 export const URL = {
-    CHAT: "/chat"
-}
+	CHAT: 'chat',
+};
+
+export const ERROR = {
+	NOT_FOUND_USER: 'ERR-1',
+};
