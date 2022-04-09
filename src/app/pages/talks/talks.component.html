@@ -4,7 +4,7 @@
 <button (click)="createTalk()">Talk to</button>
 
 <ul>
-    <li *ngFor="let talk of talks; trackBy: trackByTalks ">
-        <a [routerLink]=[urlChat]>{{talk}}</a>
+    <li *ngFor="let talkKey of talkKeys; trackBy: trackByTalks ">
+        <a [routerLink]=[urlChat,talkKey]>{{talkKey}}</a>
     </li>
 </ul>
