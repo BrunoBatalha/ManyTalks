@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Talk } from 'src/app/models/Talk';
 import { v4 as uuidv4 } from 'uuid';
 import { BaseService } from '../base.service';
@@ -29,11 +29,11 @@ export class UserTalkService extends BaseService<Talk> {
 	}
 
 	filterByUserKey(userKey: string | undefined): Observable<string[]> {
-		return new Observable((subscriber): void => {
-			this.filterBy('userTalks', userKey, '_userKey_').subscribe((snap): void => {
-				subscriber.next(snap.map((s) => s.key as string));
-			});
-		});
+		return this.filterBy('userTalks', userKey, '_userKey_').pipe(
+			map((snap) => {
+				return snap.map((s) => s.key as string);
+			})
+		);
 	}
 
 	getKeyByUserKeys(userKey: string | undefined, userKey2: string | undefined): Observable<string | null> {
