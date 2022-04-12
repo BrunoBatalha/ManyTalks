@@ -22,6 +22,17 @@ export class BaseService<TEntity> {
 		return this.database.object(this.pathRoot).update(pathsToUpdate);
 	}
 
+	protected updateMany$(pathsToUpdate: { [x: string]: unknown }): Observable<void> {
+		return new Observable((subscriber) => {
+			this.database
+				.object(this.pathRoot)
+				.update(pathsToUpdate)
+				.then(() => {
+					subscriber.next();
+				});
+		});
+	}
+
 	protected filterBy(
 		path: string,
 		property: string | undefined,
@@ -35,6 +46,13 @@ export class BaseService<TEntity> {
 	protected filterByKey(path: string, key: string): Observable<TEntity[]> {
 		return this.database
 			.list(`${this.pathRoot}/${path}`, (ref) => ref.orderByKey().equalTo(key))
+			.valueChanges()
+			.pipe(map((snap) => snap as TEntity[]));
+	}
+
+	protected filterByPathAndOrderBy(path: string, orderBy: string): Observable<TEntity[]> {
+		return this.database
+			.list(`${this.pathRoot}/${path}`, (ref) => ref.orderByChild(orderBy))
 			.valueChanges()
 			.pipe(map((snap) => snap as TEntity[]));
 	}

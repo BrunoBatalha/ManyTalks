@@ -1,1 +1,8 @@
-<p>chat works!</p>
+<div>
+    <span *ngFor="let message of messages; trackBy: trackByMessages" 
+        style="white-space: pre-wrap; display: block;">{{message.text}}</span>
+</div>
+
+<pre contenteditable (input)="onInputMessage($event)" style="height: 200px; border:1px solid red"></pre>
+
+<button (click)="sendMessage()">Enviar</button>
