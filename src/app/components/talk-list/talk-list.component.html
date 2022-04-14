@@ -1,0 +1,5 @@
+<ul>
+    <li *ngFor="let talkKey of talkKeys; trackBy: trackByTalks">
+        <app-talk-row [name]="talkKey" [key]="talkKey"></app-talk-row>
+    </li>
+</ul>
