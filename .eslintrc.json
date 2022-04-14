@@ -17,18 +17,24 @@
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "plugin:prettier/recommended",        
-				"plugin:@typescript-eslint/recommended"
+        "plugin:prettier/recommended",
+        "plugin:@typescript-eslint/recommended"
       ],
       "rules": {
-				"no-useless-return": "warn",
-				"prettier/prettier": "warn",
+        "no-useless-return": "warn",
+        "prettier/prettier": "warn",
         "@typescript-eslint/explicit-function-return-type": "warn",
         "@typescript-eslint/unbound-method": "off",
-				"@typescript-eslint/no-unused-vars": "warn",
-				"@typescript-eslint/no-inferrable-types": "off",
-				"@typescript-eslint/array-type": ["warn", { "default": "array-simple", "read-only": "array-simple" }],
-				"@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/array-type": [
+          "warn",
+          {
+            "default": "array-simple",
+            "read-only": "array-simple"
+          }
+        ],
+        "@typescript-eslint/no-explicit-any": "off",
         "@angular-eslint/directive-selector": [
           "error",
           {
@@ -55,6 +61,14 @@
         "plugin:@angular-eslint/template/recommended"
       ],
       "rules": {}
+    },
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:ngrx/recommended"
+      ]
     }
   ]
 }
