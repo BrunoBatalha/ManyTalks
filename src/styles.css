@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary: #16181f;
+    --primary-light: #313642;
+    --secondary: #f9f9f9;
+    --tertiary: #f04c4d;
+}
+
+body {
+    background: radial-gradient(circle at center, var(--primary-light), var(--primary));
+}
+
+* {
+    color: var(--secondary);
+    font-family: 'Roboto', sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
