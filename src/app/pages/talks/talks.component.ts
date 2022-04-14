@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { concatMap, map, of, throwError } from 'rxjs';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user/user.service';
 import { UserPublicService } from 'src/app/services/userPublic/user-public.service';
 import { UserTalkService } from 'src/app/services/userTalk/user-talk.service';
 import { ERROR, URL } from 'src/app/shared/constants';
+import { IAppState, setUser } from 'src/app/store/app.state';
 
 @Component({
 	selector: 'app-talks',
@@ -22,9 +24,18 @@ export class TalksComponent implements OnInit {
 		private userService: UserService,
 		private userPublicService: UserPublicService,
 		private userTalkService: UserTalkService,
-		private router: Router
+		private router: Router,
+		private store:Store<{app:IAppState}>
 	) {
 		this.loadUser();
+
+		this.store.select('app').pipe(map(s => s.user)).subscribe(user =>{
+			if(user){
+				this.userService.saveInStorage(user);
+				this.currentUser = user;	
+				this.listTalks();
+			}
+		})
 	}
 
 	ngOnInit(): void {
@@ -46,17 +57,16 @@ export class TalksComponent implements OnInit {
 		}
 	}
 
-	createUser(): void {
-		const user: User = {
-			username: 'Batalha',
-			// username: new Date().getTime().toString(),
-		};
-		this.userService.insertUser(user).subscribe((user): void => {
-			const isSaved = this.userService.saveInStorage(user);
-			if (isSaved) {
+	private createUser(): void {
+		fetch('https://random-word-api.herokuapp.com/word').then(async response => {			
+			const user: User = {
+				username: (await response.json())[0],
+			};
+			this.userService.insertUser(user).subscribe((user): void => {
+				this.userService.saveInStorage(user);
 				this.setUser(user);
-			}
-		});
+			});			
+		})
 	}
 
 	createTalk(): void {
@@ -97,8 +107,7 @@ export class TalksComponent implements OnInit {
 	}
 
 	setUser(user: User): void {
-		this.currentUser = user;
-		this.listTalks();
+		this.store.dispatch(setUser(user))
 	}
 
 	listTalks(): void {
