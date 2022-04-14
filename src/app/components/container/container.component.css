@@ -1,0 +1,11 @@
+.container{
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 8px 16px;
+    border-radius: 20px;
+    height: 500px;
+
+    background: linear-gradient(145deg, var(--primary-light), var(--primary) 110%);
+    box-shadow:  8px 8px 32px var(--primary),
+                -8px -8px 32px var(--primary-light);
+}
