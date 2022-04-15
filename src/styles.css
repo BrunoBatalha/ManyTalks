@@ -1,12 +1,18 @@
 :root {
+    --primary-dark: #22242c;
     --primary: #16181f;
     --primary-light: #313642;
     --secondary: #f9f9f9;
     --tertiary: #f04c4d;
 }
 
+html {
+    font-size: 62.5%;
+}
+
 body {
     background: radial-gradient(circle at center, var(--primary-light), var(--primary));
+    font-size: 1.8rem;
 }
 
 * {
@@ -17,4 +23,11 @@ body {
 ul {
     list-style-type: none;
     padding: 0;
+}
+
+@media (max-width: 600px) {
+    body {
+        background: radial-gradient(circle at center, var(--primary-light), var(--primary));
+        font-size: 1.6rem;
+    }
 }
