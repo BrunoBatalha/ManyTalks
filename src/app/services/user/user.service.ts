@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/User';
 import { StorageService } from 'src/app/services/storage/storage.service';
+import { selectLoadUser, setUser } from 'src/app/store/app.state';
 import { v4 as uuidv4 } from 'uuid';
 import { BaseService } from '../base.service';
 
@@ -14,7 +16,9 @@ export class UserService extends BaseService<User> {
 	private usersPublicPath = 'users/public';
 	private userStorage = 'user';
 
-	constructor(database: AngularFireDatabase, private storageService: StorageService) {
+	private storeUser$: Observable<User | null> = this.store.select(selectLoadUser);
+
+	constructor(database: AngularFireDatabase, private storageService: StorageService, private store: Store) {
 		super(database);
 	}
 
@@ -50,5 +54,20 @@ export class UserService extends BaseService<User> {
 			return null;
 		}
 		return user as User;
+	}
+
+	getLoggedUser(): Observable<User | null> {
+		return new Observable((subscriber) => {
+			this.storeUser$.subscribe((user) => {
+				if (user == null) {
+					const userStorage = this.getFromStorage();
+					if (userStorage) {
+						this.store.dispatch(setUser({ user: userStorage }));
+					}
+				}
+				subscriber.next(user);
+				subscriber.complete();
+			});
+		});
 	}
 }

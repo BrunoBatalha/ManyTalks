@@ -7,7 +7,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { UserPublicService } from 'src/app/services/userPublic/user-public.service';
 import { UserTalkService } from 'src/app/services/userTalk/user-talk.service';
 import { ERROR, URL } from 'src/app/shared/constants';
-import { IAppState, setUser } from 'src/app/store/app.state';
+import { selectLoadUser, setUser } from 'src/app/store/app.state';
 
 @Component({
 	selector: 'app-talks',
@@ -19,23 +19,24 @@ export class TalksComponent implements OnInit {
 	usernameToTalk: string = '';
 	currentUser: User | null = null;
 	talkKeys: string[] = [];
+	user$ = this.store.select(selectLoadUser);
 
 	constructor(
 		private userService: UserService,
 		private userPublicService: UserPublicService,
 		private userTalkService: UserTalkService,
 		private router: Router,
-		private store:Store<{app:IAppState}>
+		private store: Store
 	) {
 		this.loadUser();
 
-		this.store.select('app').pipe(map(s => s.user)).subscribe(user =>{
-			if(user){
+		this.user$.subscribe((user) => {
+			if (user) {
 				this.userService.saveInStorage(user);
-				this.currentUser = user;	
+				this.currentUser = user;
 				this.listTalks();
 			}
-		})
+		});
 	}
 
 	ngOnInit(): void {
@@ -43,30 +44,39 @@ export class TalksComponent implements OnInit {
 	}
 
 	loadUser(): void {
-		const loggedUser = this.userService.getFromStorage();
-		if (loggedUser?.key == null) {
-			this.createUser();
-		} else {
-			this.userPublicService.getUserByKey(loggedUser.key).subscribe((user) => {
-				if (user != null) {
-					this.setUser(loggedUser);
-				} else {
-					this.createUser();
-				}
-			});
+		this.userService.getLoggedUser().subscribe((loggedUser) => {
+			if (loggedUser?.key == null) {
+				this.createUser();
+			} else {
+				this.checkExistsUser(loggedUser);
+			}
+		});
+	}
+
+	checkExistsUser(loggedUser: User): void {
+		if (loggedUser.key == undefined) {
+			return;
 		}
+
+		this.userPublicService.getUserByKey(loggedUser.key).subscribe((user) => {
+			if (user != null) {
+				this.setUser(loggedUser);
+			} else {
+				this.createUser();
+			}
+		});
 	}
 
 	private createUser(): void {
-		fetch('https://random-word-api.herokuapp.com/word').then(async response => {			
+		fetch('https://random-word-api.herokuapp.com/word').then(async (response) => {
 			const user: User = {
 				username: (await response.json())[0],
 			};
 			this.userService.insertUser(user).subscribe((user): void => {
 				this.userService.saveInStorage(user);
 				this.setUser(user);
-			});			
-		})
+			});
+		});
 	}
 
 	createTalk(): void {
@@ -107,7 +117,7 @@ export class TalksComponent implements OnInit {
 	}
 
 	setUser(user: User): void {
-		this.store.dispatch(setUser(user))
+		this.store.dispatch(setUser({ user }));
 	}
 
 	listTalks(): void {
