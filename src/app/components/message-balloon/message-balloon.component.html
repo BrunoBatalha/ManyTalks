@@ -1,0 +1,8 @@
+<div class="message-balloon__container">
+    <div class="message-balloon__wrapper"
+        [ngClass]="{'message-balloon__wrapper--right': styles.isLoggedUser,
+                    'message-balloon__wrapper--logged-user': styles.isLoggedUser,
+                    'message-balloon__wrapper--default':!styles.isLoggedUser}">
+        <span class="message-balloon__text">{{text}}</span>
+    </div>
+</div>

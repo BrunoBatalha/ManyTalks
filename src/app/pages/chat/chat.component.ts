@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class ChatComponent implements OnInit {
 	messages: Message[] = [];
-	text = '';
+	text: string = '';
 	talkKey: string = '';
 
 	constructor(

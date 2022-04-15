@@ -1,6 +1,9 @@
 <div>
-    <span *ngFor="let message of messages; trackBy: trackByMessages" 
-        style="white-space: pre-wrap; display: block;">{{message.text}}</span>
+    <app-message-balloon 
+        *ngFor="let message of messages; trackBy: trackByMessages" 
+        [fromUserKey]="message.fromUser"
+        [text]="message.text"
+        ></app-message-balloon>
 </div>
 
 <pre contenteditable (input)="onInputMessage($event)" style="height: 200px; border:1px solid red"></pre>
