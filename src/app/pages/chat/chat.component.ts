@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import * as Faether from 'feather-icons';
 import { Message } from 'src/app/models/Message';
 import { TalkService } from 'src/app/services/talk/talk.service';
 import { UserService } from 'src/app/services/user/user.service';
-
 @Component({
 	selector: 'app-chat',
 	templateUrl: './chat.component.html',
-	styleUrls: [],
+	styleUrls: ['./chat.component.css'],
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewInit {
 	messages: Message[] = [];
 	text: string = '';
 	talkKey: string = '';
@@ -20,6 +20,10 @@ export class ChatComponent implements OnInit {
 		private activatedRoute: ActivatedRoute
 	) {}
 
+	ngAfterViewInit(): void {
+		Faether.replace();
+	}
+
 	ngOnInit(): void {
 		this.activatedRoute.params.subscribe((params) => {
 			this.talkKey = params['id'];
@@ -29,8 +33,8 @@ export class ChatComponent implements OnInit {
 		});
 	}
 
-	onInputMessage($event: any): void {
-		this.text = $event.target.textContent;
+	onInputMessage(value: string): void {
+		this.text = value;
 	}
 
 	sendMessage(): void {

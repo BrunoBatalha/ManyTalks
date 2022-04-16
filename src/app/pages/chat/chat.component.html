@@ -6,6 +6,9 @@
         ></app-message-balloon>
 </div>
 
-<pre contenteditable (input)="onInputMessage($event)" style="height: 200px; border:1px solid red"></pre>
-
-<button (click)="sendMessage()">Enviar</button>
+<div class="chat__input-container">
+    <app-input-message class="chat__input" (inputMessage)="onInputMessage($event)"></app-input-message>
+    <button class="chat__button-send" (click)="sendMessage()">
+        <i class="chat__button-send__icon" data-feather="send"></i>
+    </button>
+</div>

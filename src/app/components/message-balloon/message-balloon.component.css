@@ -9,6 +9,8 @@
 }
 
 .message-balloon__wrapper {
+    max-width: 90%;
+    word-wrap: break-word;
     margin: .8rem 0;
     padding: .8rem .6rem;
     border-radius: .6rem;

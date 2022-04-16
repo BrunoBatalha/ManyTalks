@@ -1,0 +1,30 @@
+.input-message {
+    box-sizing: border-box;
+    min-height: 48px;
+    max-height: 108px;
+    padding: 4px 20px;
+    border-radius: 34px;
+    border: 2px solid transparent;
+    overflow: auto;
+    background:
+        linear-gradient(to right, transparent, transparent),
+        linear-gradient(to right, var(--primary-light) 1%, transparent 100%);
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    box-shadow: inset 3px 3px 3px var(--primary),
+        inset -2px -2px 2px var(--primary-light);
+    max-width: 100%;
+}
+
+.input-message__editable {
+    outline: none;
+    white-space: pre-wrap;
+}
+
+.input-message__editable:empty:before {
+    content: attr(data-placeholder);
+    color: var(--secondary);
+    filter: opacity(.4);
+    z-index: -1;
+    cursor: text;
+}

@@ -43,7 +43,7 @@ export class TalksComponent implements OnInit {
 		this.listTalks();
 	}
 
-	loadUser(): void {
+	private loadUser(): void {
 		this.userService.getLoggedUser().subscribe((loggedUser) => {
 			if (loggedUser?.key == null) {
 				this.createUser();
@@ -53,7 +53,7 @@ export class TalksComponent implements OnInit {
 		});
 	}
 
-	checkExistsUser(loggedUser: User): void {
+	private checkExistsUser(loggedUser: User): void {
 		if (loggedUser.key == undefined) {
 			return;
 		}
@@ -116,7 +116,7 @@ export class TalksComponent implements OnInit {
 			});
 	}
 
-	setUser(user: User): void {
+	private setUser(user: User): void {
 		this.store.dispatch(setUser({ user }));
 	}
 

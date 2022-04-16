@@ -15,6 +15,7 @@ import { TalkRowComponent } from './components/talk-row/talk-row.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { TalksComponent } from './pages/talks/talks.component';
 import { appReducer } from './store/app.state';
+import { InputMessageComponent } from './components/input-message/input-message.component';
 
 @NgModule({
 	declarations: [
@@ -25,6 +26,7 @@ import { appReducer } from './store/app.state';
 		TalkRowComponent,
 		TalkListComponent,
 		MessageBalloonComponent,
+  InputMessageComponent,
 	],
 	imports: [
 		BrowserModule,
