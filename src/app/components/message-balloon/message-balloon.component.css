@@ -38,4 +38,5 @@
 
 .message-balloon__text {
     white-space: pre-wrap;
+    color: var(--secondary);
 }

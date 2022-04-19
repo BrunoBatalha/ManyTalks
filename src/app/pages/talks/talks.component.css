@@ -1,0 +1,41 @@
+.talk__container {
+    display: flex;
+}
+
+.talk__input {
+    flex-grow: 1;
+    border: 1px solid red;
+    outline: none;
+    box-sizing: border-box;
+    min-height: 48px;
+    max-height: 108px;
+    padding: 4px 20px;
+    border-radius: 34px;
+    margin-right: 8px;
+    border: 2px solid transparent;
+    background:
+        linear-gradient(to right, transparent, transparent),
+        linear-gradient(to right, var(--primary-light) 0%, var(--primary) 150%);
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    box-shadow: inset 3px 3px 3px var(--primary),
+        inset -2px -2px 2px var(--primary-light);
+    max-width: 100%;
+}
+
+.talk__button-add {
+    cursor: pointer;
+    margin: 0 auto;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(145deg, var(--tertiary), var(--tertiary-dark));
+    box-shadow: .8rem .8rem 1.2rem var(--primary),
+        -.4rem -.4rem 1.2rem #4e4e54;
+}
+
+.talk__button-add:hover {
+    filter: brightness(.8);
+    transition: filter .2s;
+}

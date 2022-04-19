@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import * as Faether from 'feather-icons';
 import { concatMap, map, of, throwError } from 'rxjs';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user/user.service';
@@ -12,9 +13,9 @@ import { selectLoadUser, setUser } from 'src/app/store/app.state';
 @Component({
 	selector: 'app-talks',
 	templateUrl: './talks.component.html',
-	styleUrls: [],
+	styleUrls: ['./talks.component.css'],
 })
-export class TalksComponent implements OnInit {
+export class TalksComponent implements OnInit, AfterViewInit {
 	urlChat: string = URL.CHAT;
 	usernameToTalk: string = '';
 	currentUser: User | null = null;
@@ -37,6 +38,10 @@ export class TalksComponent implements OnInit {
 				this.listTalks();
 			}
 		});
+	}
+
+	ngAfterViewInit(): void {
+		Faether.replace();
 	}
 
 	ngOnInit(): void {

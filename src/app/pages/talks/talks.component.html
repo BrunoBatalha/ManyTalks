@@ -1,6 +1,11 @@
-<h1>{{currentUser?.username}}</h1>
+<h3>Bem vindo, {{currentUser?.username}}</h3>
 
-<input [(ngModel)]="usernameToTalk" />
-<button (click)="createTalk()">Talk to</button>
+
+<div class="talk__container">
+    <input placeholder="Example: Carlos, Bruno and etc." class="talk__input" [(ngModel)]="usernameToTalk" />
+    <button class="talk__button-add" (click)="createTalk()">
+        <i class="icon--center" data-feather="plus"></i>
+    </button>
+</div>
 
 <app-talk-list></app-talk-list>

@@ -17,13 +17,24 @@ body {
 }
 
 * {
-    color: var(--secondary);
     font-family: 'Roboto', sans-serif;
+}
+
+pre,
+input,
+h3,
+button {
+    color: var(--secondary);
 }
 
 ul {
     list-style-type: none;
     padding: 0;
+}
+
+.icon--center {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 @media (max-width: 600px) {
