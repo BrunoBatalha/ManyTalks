@@ -1,14 +1,22 @@
-<div>
-    <app-message-balloon 
+<div class="chat__header">
+    <button class="chat__button-back" (click)="backPage()">
+        <i class="icon--center" data-feather="arrow-left"></i>
+    </button>
+</div>
+
+<div class="chat__messages" #containerListMessages>
+    <div #listMessages>
+        <app-message-balloon 
         *ngFor="let message of messages; trackBy: trackByMessages" 
         [fromUserKey]="message.fromUser"
         [text]="message.text"
         ></app-message-balloon>
+    </div>
 </div>
 
 <div class="chat__input-container">
     <app-input-message class="chat__input" (inputMessage)="onInputMessage($event)"></app-input-message>
     <button class="chat__button-send" (click)="sendMessage()">
-        <i class="chat__button-send__icon" data-feather="send"></i>
+        <i class="icon--center" data-feather="send"></i>
     </button>
 </div>
