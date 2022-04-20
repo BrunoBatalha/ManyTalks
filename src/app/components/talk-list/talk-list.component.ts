@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
 import { User } from 'src/app/models/User';
 import { UserTalkService } from 'src/app/services/userTalk/user-talk.service';
-import { IAppState } from 'src/app/store/app.state';
+import { selectLoadUser } from 'src/app/store/app.state';
 
 @Component({
 	selector: 'app-talk-list',
@@ -12,18 +11,16 @@ import { IAppState } from 'src/app/store/app.state';
 })
 export class TalkListComponent implements OnInit {
 	talkKeys: string[] = [];
+	user$ = this.store.select(selectLoadUser);
 
-	constructor(private store: Store<{ app: IAppState }>, private userTalkService: UserTalkService) {}
+	constructor(private store: Store, private userTalkService: UserTalkService) {}
 
 	ngOnInit(): void {
-		this.store
-			.select('app')
-			.pipe(map((s) => s.user))
-			.subscribe((user) => {
-				if (user) {
-					this.listTalks(user);
-				}
-			});
+		this.user$.subscribe((user) => {
+			if (user) {
+				this.listTalks(user);
+			}
+		});
 	}
 
 	listTalks(user: User): void {
