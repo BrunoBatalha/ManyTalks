@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as Faether from 'feather-icons';
+import { Subject } from 'rxjs';
 import { Message } from 'src/app/models/Message';
 import { TalkService } from 'src/app/services/talk/talk.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -12,11 +13,12 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class ChatComponent implements OnInit, AfterViewInit {
 	@ViewChild('listMessages') refListMessages: ElementRef | null = null;
-	@ViewChild('containerListMessages') refContainerListMessages: ElementRef | null = null;
+	@ViewChild('containerListMessages') refContainerListMessages!: ElementRef;
 	private scrollPositionYToAutomaticDown: number = 1200;
 	private alreadyScrollFirstTime = false;
+	clearInput: Subject<void>;
 	messages: Message[] = [];
-	text: string = '';
+	messageToSend: string = '';
 	talkKey: string = '';
 
 	constructor(
@@ -24,7 +26,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
 		private userService: UserService,
 		private activatedRoute: ActivatedRoute,
 		private location: Location
-	) {}
+	) {
+		this.clearInput = new Subject();
+	}
 
 	ngAfterViewInit(): void {
 		Faether.replace();
@@ -76,16 +80,17 @@ export class ChatComponent implements OnInit, AfterViewInit {
 		this.location.back();
 	}
 
-	resizeListMessages(event: any) {
-		console.log('teste');
-	}
-
 	onInputMessage(value: string): void {
-		this.text = value;
+		this.messageToSend = value;
 	}
 
 	sendMessage(): void {
-		this.talkService.sendMessage(this.talkKey, this.text, this.userService.getFromStorage()?.key as string).subscribe();
+		this.talkService
+			.sendMessage(this.talkKey, this.messageToSend, this.userService.getFromStorage()?.key as string)
+			.subscribe(() => {
+				this.messageToSend = '';
+				this.clearInput.next();
+			});
 	}
 
 	trackByMessages(_: number, message: Message): string {

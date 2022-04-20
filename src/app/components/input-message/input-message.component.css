@@ -1,11 +1,11 @@
 .input-message {
     box-sizing: border-box;
     min-height: 48px;
-    max-height: 108px;
-    padding: 4px 20px;
-    border-radius: 34px;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    border-radius: 28px;
     border: 2px solid transparent;
-    overflow: auto;
+    overflow: hidden;
     background:
         linear-gradient(to right, transparent, transparent),
         linear-gradient(to right, var(--primary-light) 1%, transparent 100%);
@@ -16,9 +16,16 @@
     max-width: 100%;
 }
 
+.input-message__wrapper {
+    overflow: auto;
+    max-height: calc(32 * 2px);
+    margin: 12px 0;
+}
+
 .input-message__editable {
     outline: none;
     white-space: pre-wrap;
+    margin: 0;
 }
 
 .input-message__editable:empty:before {

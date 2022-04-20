@@ -55,27 +55,8 @@
 }
 
 .chat__messages {
-    max-height: 60vh;
+    min-height: 50vh;
+    max-height: 50vh;
     overflow: auto;
     padding: 8px;
-}
-
-/* width */
-.chat__messages::-webkit-scrollbar {
-    width: 4px;
-}
-
-/* Track */
-.chat__messages::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-/* Handle */
-.chat__messages::-webkit-scrollbar-thumb {
-    background: var(--primary-dark);
-}
-
-/* Handle on hover */
-.chat__messages::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
 }
