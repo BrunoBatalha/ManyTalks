@@ -96,4 +96,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
 	trackByMessages(_: number, message: Message): string {
 		return message.key;
 	}
+
+	onKeyDown(): void {
+		this.sendMessage();
+	}
 }

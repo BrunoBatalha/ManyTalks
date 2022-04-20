@@ -15,7 +15,7 @@
 </div>
 
 <div class="chat__input-container">
-    <app-input-message class="chat__input" (inputMessage)="onInputMessage($event)" [clearInput$]="clearInput.asObservable()"></app-input-message>
+    <app-input-message (keydown.control.enter)="onKeyDown()" class="chat__input" (inputMessage)="onInputMessage($event)" [clearInput$]="clearInput.asObservable()"></app-input-message>
     <button class="chat__button-send" (click)="sendMessage()">
         <i class="icon--center" data-feather="send"></i>
     </button>
