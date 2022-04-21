@@ -14,24 +14,6 @@
 
 }
 
-.contact-row__wrapper-image {
-    /* background-color: #1b1f26; */
-    background: var(--primary);
-    box-shadow: 4px 4px 4px var(--primary),
-        -4px -4px 4px #4e4e5450;
-    border-radius: 50%;
-    padding: 4px;
-    width: 36px;
-    height: 36px;
-    padding: 8px 8px;
-}
-
-.contact-row__image {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-}
-
 .contact-row__wrapper-message {
     margin-left: 16px;
     display: flex;

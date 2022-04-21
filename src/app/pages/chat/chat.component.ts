@@ -1,11 +1,14 @@
 import { Location } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 import * as Faether from 'feather-icons';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Message } from 'src/app/models/Message';
+import { User } from 'src/app/models/User';
 import { TalkService } from 'src/app/services/talk/talk.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { selectLoadTalkWithUser } from 'src/app/store/chat.state';
 @Component({
 	selector: 'app-chat',
 	templateUrl: './chat.component.html',
@@ -16,6 +19,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
 	@ViewChild('containerListMessages') refContainerListMessages!: ElementRef;
 	private scrollPositionYToAutomaticDown: number = 1200;
 	private alreadyScrollFirstTime = false;
+	private storeChat$: Observable<User | null> = this.store.select(selectLoadTalkWithUser);
+	talkingWithUser: User | null = null;
 	clearInput: Subject<void>;
 	messages: Message[] = [];
 	messageToSend: string = '';
@@ -25,7 +30,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
 		private talkService: TalkService,
 		private userService: UserService,
 		private activatedRoute: ActivatedRoute,
-		private location: Location
+		private location: Location,
+		private store: Store
 	) {
 		this.clearInput = new Subject();
 	}
@@ -73,6 +79,10 @@ export class ChatComponent implements OnInit, AfterViewInit {
 			this.talkService.listMessages(this.talkKey).subscribe((messages) => {
 				this.messages = messages.reverse();
 			});
+		});
+
+		this.storeChat$.subscribe((user) => {
+			this.talkingWithUser = user;
 		});
 	}
 

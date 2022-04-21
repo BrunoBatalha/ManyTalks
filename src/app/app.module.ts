@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContainerComponent } from './components/container/container.component';
+import { ImageRoundedComponent } from './components/image-rounded/image-rounded.component';
 import { InputMessageComponent } from './components/input-message/input-message.component';
 import { MessageBalloonComponent } from './components/message-balloon/message-balloon.component';
 import { TalkListComponent } from './components/talk-list/talk-list.component';
@@ -17,6 +18,7 @@ import { TalkRowComponent } from './components/talk-row/talk-row.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { TalksComponent } from './pages/talks/talks.component';
 import { appReducer } from './store/app.state';
+import { chatReducer } from './store/chat.state';
 
 @NgModule({
 	declarations: [
@@ -28,6 +30,7 @@ import { appReducer } from './store/app.state';
 		TalkListComponent,
 		MessageBalloonComponent,
 		InputMessageComponent,
+		ImageRoundedComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -35,7 +38,7 @@ import { appReducer } from './store/app.state';
 		FormsModule,
 		AngularFireModule.initializeApp(environment.firebase as FirebaseOptions),
 		AngularFireDatabaseModule,
-		StoreModule.forRoot({ app: appReducer }, {}),
+		StoreModule.forRoot({ app: appReducer, chat: chatReducer }, {}),
 		StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
 	],
 	providers: [],

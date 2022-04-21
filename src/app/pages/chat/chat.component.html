@@ -2,6 +2,14 @@
     <button class="chat__button-back" (click)="backPage()">
         <i class="icon--center" data-feather="arrow-left"></i>
     </button>
+
+    <div class="chat__header__contact">
+        <app-image-rounded srcImage="{{'https://avatars.dicebear.com/api/micah/s.svg'}}"></app-image-rounded>   
+        <div>
+            <div class="chat__header_name">{{talkingWithUser?.username}}</div>    
+            <div class="chat__header_action">Typing</div>    
+        </div>
+    </div>
 </div>
 
 <div class="chat__messages" #containerListMessages>

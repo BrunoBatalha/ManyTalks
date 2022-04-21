@@ -1,9 +1,9 @@
 .container--padding {
-    padding: 24px 64px;
+    padding: 24px 16px;
 }
 
 .container {
-    max-width: 50rem;
+    max-width: 40rem;
     margin: 2vh auto 0 auto;
     border-radius: 20px;
     min-height: 90vh;

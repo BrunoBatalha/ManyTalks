@@ -1,3 +1,9 @@
+.chat__header {
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center
+}
+
 .chat__input-container {
     display: flex;
     align-items: baseline;
@@ -26,19 +32,16 @@
 
 .chat__button-back {
     cursor: pointer;
-    margin: 0 auto;
-    width: 48px;
-    height: 48px;
+    width: 38px;
+    height: 38px;
     border: none;
     border-radius: 50%;
     background: var(--primary-dark);
     box-shadow: .8rem .8rem .8rem var(--primary),
         -.0rem -.0rem .8rem #f9f9f965;
+    margin-right: 32px;
 }
 
-.chat__header {
-    margin-bottom: 32px;
-}
 
 .chat__button-send:hover,
 .chat__button-back:hover {
@@ -59,4 +62,16 @@
     max-height: 50vh;
     overflow: auto;
     padding: 8px;
+}
+
+.chat__header__contact {
+    display: flex;
+    color: var(--secondary);
+    column-gap: 32px;
+    align-items: center;
+}
+
+.chat__header_action {
+    margin-top: 6px;
+    font-size: 12px;
 }
