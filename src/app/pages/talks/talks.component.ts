@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import * as Faether from 'feather-icons';
 import { concatMap, map, of, throwError } from 'rxjs';
 import { User } from 'src/app/models/User';
+import { UserTalkClient } from 'src/app/models/UserTalkClient';
 import { UserService } from 'src/app/services/user/user.service';
 import { UserPublicService } from 'src/app/services/userPublic/user-public.service';
 import { UserTalkService } from 'src/app/services/userTalk/user-talk.service';
@@ -18,8 +19,8 @@ import { selectLoadUser, setUser } from 'src/app/store/app.state';
 export class TalksComponent implements OnInit, AfterViewInit {
 	urlChat: string = URL.CHAT;
 	usernameToTalk: string = '';
-	currentUser: User | null = null;
-	talkKeys: string[] = [];
+	currentUser!: User;
+	userTalkClients: UserTalkClient[] = [];
 	user$ = this.store.select(selectLoadUser);
 
 	constructor(
@@ -104,7 +105,7 @@ export class TalksComponent implements OnInit, AfterViewInit {
 					if (resultGetUserTalk?.userTalkKey !== null) {
 						return of(resultGetUserTalk.userTalkKey);
 					}
-					return this.userTalkService.insertUserTalk(this.currentUser?.key, resultGetUserTalk.userFound.key);
+					return this.userTalkService.insertUserTalk(this.currentUser, resultGetUserTalk.userFound);
 				})
 			)
 			.subscribe({
@@ -115,7 +116,8 @@ export class TalksComponent implements OnInit, AfterViewInit {
 					if (err == ERROR.NOT_FOUND_USER) {
 						alert('Usuário não encontrado');
 					} else {
-						alert('error desconhecido: ' + err);
+						console.error('ERRO:');
+						console.error(err);
 					}
 				},
 			});
@@ -128,7 +130,7 @@ export class TalksComponent implements OnInit, AfterViewInit {
 	listTalks(): void {
 		if (this.currentUser != null) {
 			this.userTalkService.filterByUserKey(this.currentUser?.key).subscribe((talkKeys) => {
-				this.talkKeys = talkKeys;
+				this.userTalkClients = talkKeys;
 			});
 		}
 	}

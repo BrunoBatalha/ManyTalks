@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { User } from 'src/app/models/User';
+import { UserTalkClient } from 'src/app/models/UserTalkClient';
 import { UserTalkService } from 'src/app/services/userTalk/user-talk.service';
 import { selectLoadUser } from 'src/app/store/app.state';
 
@@ -10,7 +11,7 @@ import { selectLoadUser } from 'src/app/store/app.state';
 	styleUrls: ['./talk-list.component.css'],
 })
 export class TalkListComponent implements OnInit {
-	talkKeys: string[] = [];
+	userTalkClients: UserTalkClient[] = [];
 	user$ = this.store.select(selectLoadUser);
 
 	constructor(private store: Store, private userTalkService: UserTalkService) {}
@@ -26,7 +27,7 @@ export class TalkListComponent implements OnInit {
 	listTalks(user: User): void {
 		if (user != null) {
 			this.userTalkService.filterByUserKey(user.key).subscribe((talkKeys) => {
-				this.talkKeys = talkKeys;
+				this.userTalkClients = talkKeys;
 			});
 		}
 	}
