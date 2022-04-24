@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as Faether from 'feather-icons';
@@ -10,16 +10,18 @@ import { UserPublicService } from 'src/app/services/userPublic/user-public.servi
 import { UserTalkService } from 'src/app/services/userTalk/user-talk.service';
 import { ERROR, URL } from 'src/app/shared/constants';
 import { selectLoadUser, setUser } from 'src/app/store/app.state';
+import { setTalkWithUser } from 'src/app/store/chat.state';
 
 @Component({
 	selector: 'app-talks',
 	templateUrl: './talks.component.html',
 	styleUrls: ['./talks.component.css'],
 })
-export class TalksComponent implements OnInit, AfterViewInit {
+export class TalksComponent implements OnInit, DoCheck {
 	urlChat: string = URL.CHAT;
 	usernameToTalk: string = '';
 	currentUser!: User;
+	usernameToCreate!: string;
 	userTalkClients: UserTalkClient[] = [];
 	user$ = this.store.select(selectLoadUser);
 
@@ -40,8 +42,7 @@ export class TalksComponent implements OnInit, AfterViewInit {
 			}
 		});
 	}
-
-	ngAfterViewInit(): void {
+	ngDoCheck(): void {
 		Faether.replace();
 	}
 
@@ -51,9 +52,7 @@ export class TalksComponent implements OnInit, AfterViewInit {
 
 	private loadUser(): void {
 		this.userService.getLoggedUser().subscribe((loggedUser) => {
-			if (loggedUser?.key == null) {
-				this.createUser();
-			} else {
+			if (loggedUser?.key != null) {
 				this.checkExistsUser(loggedUser);
 			}
 		});
@@ -67,21 +66,14 @@ export class TalksComponent implements OnInit, AfterViewInit {
 		this.userPublicService.getUserByKey(loggedUser.key).subscribe((user) => {
 			if (user != null) {
 				this.setUser(loggedUser);
-			} else {
-				this.createUser();
 			}
 		});
 	}
 
-	private createUser(): void {
-		fetch('https://random-word-api.herokuapp.com/word').then(async (response) => {
-			const user: User = {
-				username: (await response.json())[0],
-			};
-			this.userService.insertUser(user).subscribe((user): void => {
-				this.userService.saveInStorage(user);
-				this.setUser(user);
-			});
+	createUser(usernameToCreate: string): void {
+		this.userService.insertUser({ username: usernameToCreate }).subscribe((user): void => {
+			this.userService.saveInStorage(user);
+			this.setUser(user);
 		});
 	}
 
@@ -110,6 +102,14 @@ export class TalksComponent implements OnInit, AfterViewInit {
 			)
 			.subscribe({
 				next: (userTalkKey) => {
+					this.store.dispatch(
+						setTalkWithUser({
+							user: {
+								username: this.usernameToTalk,
+								key: userTalkKey,
+							},
+						})
+					);
 					this.router.navigate([URL.CHAT, userTalkKey]);
 				},
 				error: (err) => {

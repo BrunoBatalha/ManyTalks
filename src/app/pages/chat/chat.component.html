@@ -4,10 +4,10 @@
     </button>
 
     <div class="chat__header__contact">
-        <app-image-rounded srcImage="{{'https://avatars.dicebear.com/api/micah/s.svg'}}"></app-image-rounded>   
+        <app-image-rounded srcImage="{{'https://avatars.dicebear.com/api/micah/'+talkingWithUser?.username+talkingWithUser?.key}}.svg"></app-image-rounded>   
         <div>
             <div class="chat__header_name">{{talkingWithUser?.username}}</div>    
-            <div class="chat__header_action">Typing</div>    
+            <!-- <div class="chat__header_action">Typing</div>     -->
         </div>
     </div>
 </div>
