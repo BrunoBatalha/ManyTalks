@@ -1,25 +1,15 @@
  
-<div class="talk__container" *ngIf="currentUser">
+<div *ngIf="currentUser">
     <div class="talk__header__logged">
         <app-image-rounded srcImage="{{'https://avatars.dicebear.com/api/micah/'+currentUser?.username+currentUser?.key}}.svg"></app-image-rounded>   
         <h3 class="talk__text talk__text-margin">Welcome, {{currentUser?.username}}</h3>
     </div>
-    <div class="talk__container">
-        <input placeholder="Username to talk" class="talk__input" [(ngModel)]="usernameToTalk" />
-        <button class="talk__button-add" (click)="createTalk()">
-            <i class="icon--center" data-feather="plus"></i>
-        </button>
-    </div>
+   <app-talk-input-button icon="plus" (clickButton)="createTalk($event)"></app-talk-input-button>
 </div>
 
-<div class="talk__container" *ngIf="!currentUser">
+<div *ngIf="!currentUser">
     <h3 class="talk__text">Hello, are you new here</h3>
-    <div class="talk__container">        
-        <input placeholder="What should we call you?" class="talk__input" #usernameToCreate />
-        <button class="talk__button-add" (click)="createUser(usernameToCreate.value)">
-            <i class="icon--center" data-feather="check"></i>
-        </button>
-    </div>
+    <app-talk-input-button icon="check" (clickButton)="createUser($event)"></app-talk-input-button>
 </div>
 
 <div  class="talk__list-wrapper">

@@ -19,7 +19,6 @@ import { setTalkWithUser } from 'src/app/store/chat.state';
 })
 export class TalksComponent implements OnInit, DoCheck {
 	urlChat: string = URL.CHAT;
-	usernameToTalk: string = '';
 	currentUser!: User;
 	usernameToCreate!: string;
 	userTalkClients: UserTalkClient[] = [];
@@ -77,9 +76,9 @@ export class TalksComponent implements OnInit, DoCheck {
 		});
 	}
 
-	createTalk(): void {
+	createTalk(usernameToTalk: string): void {
 		this.userPublicService
-			.filterByUsername(this.usernameToTalk)
+			.filterByUsername(usernameToTalk)
 			.pipe(
 				concatMap((userFound: User | null) => {
 					if (userFound === null) {
@@ -105,7 +104,7 @@ export class TalksComponent implements OnInit, DoCheck {
 					this.store.dispatch(
 						setTalkWithUser({
 							user: {
-								username: this.usernameToTalk,
+								username: usernameToTalk,
 								key: userTalkKey,
 							},
 						})

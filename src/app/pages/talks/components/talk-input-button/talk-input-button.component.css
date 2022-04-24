@@ -1,8 +1,13 @@
-.talk__text {
+.container {
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
+    height: 20%;
+    margin-bottom: 8px;
 }
 
-.talk__input {
+
+.input {
     flex-grow: 1;
     outline: none;
     box-sizing: border-box;
@@ -22,7 +27,8 @@
     max-width: 100%;
 }
 
-.talk__button-add {
+
+.button {
     cursor: pointer;
     margin: 0 auto;
     width: 42px;
@@ -34,21 +40,7 @@
         -.4rem -.4rem 1.2rem #4e4e54;
 }
 
-.talk__button-add:hover {
+.button:hover {
     filter: brightness(.8);
     transition: filter .2s;
-}
-
-
-.talk__list-wrapper {
-    max-height: 500px;
-    overflow: auto;
-}
-
-.talk__header__logged {
-    display: flex;
-}
-
-.talk__text-margin {
-    margin-left: 20px;
 }
