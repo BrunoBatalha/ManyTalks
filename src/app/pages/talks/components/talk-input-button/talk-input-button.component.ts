@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, Output } from '@angular/core';
 import { FaetherIcon } from 'src/app/shared/utils';
 
 @Component({
@@ -6,11 +6,11 @@ import { FaetherIcon } from 'src/app/shared/utils';
 	templateUrl: './talk-input-button.component.html',
 	styleUrls: ['./talk-input-button.component.css'],
 })
-export class TalkInputButtonComponent implements OnInit {
+export class TalkInputButtonComponent implements DoCheck {
 	@Output() clickButton = new EventEmitter<string>();
 	@Input() icon!: string;
 
-	ngOnInit(): void {
+	ngDoCheck(): void {
 		FaetherIcon().replace();
 	}
 }

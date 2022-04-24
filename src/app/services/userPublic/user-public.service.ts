@@ -15,15 +15,18 @@ export class UserPublicService extends BaseService<User> {
 	}
 
 	getUserByKey(key: string): Observable<User | null> {
-		return this.filterByKey(this.usersPublicPath, key).pipe(
-			map((users) => {
-				if (users.length > 0) {
-					return users[0];
-				} else {
-					return null;
-				}
-			})
-		);
+		return new Observable<User | null>((subscriber) => {
+			this.filterByKey(this.usersPublicPath, key).pipe(
+				map((users) => {
+					if (users.length > 0) {
+						subscriber.next(users[0]);
+					} else {
+						subscriber.next(null);
+					}
+					subscriber.complete();
+				})
+			);
+		});
 	}
 
 	filterByUsername(username: string): Observable<User | null> {
@@ -35,6 +38,7 @@ export class UserPublicService extends BaseService<User> {
 				} else {
 					subscriber.next(null);
 				}
+				subscriber.complete();
 			});
 		});
 	}

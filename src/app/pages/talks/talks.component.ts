@@ -1,7 +1,6 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import * as Faether from 'feather-icons';
 import { concatMap, map, of, throwError } from 'rxjs';
 import { User } from 'src/app/models/User';
 import { UserTalkClient } from 'src/app/models/UserTalkClient';
@@ -17,10 +16,9 @@ import { setTalkWithUser } from 'src/app/store/chat.state';
 	templateUrl: './talks.component.html',
 	styleUrls: ['./talks.component.css'],
 })
-export class TalksComponent implements OnInit, DoCheck {
+export class TalksComponent implements OnInit {
 	urlChat: string = URL.CHAT;
 	currentUser!: User;
-	usernameToCreate!: string;
 	userTalkClients: UserTalkClient[] = [];
 	user$ = this.store.select(selectLoadUser);
 
@@ -30,7 +28,10 @@ export class TalksComponent implements OnInit, DoCheck {
 		private userTalkService: UserTalkService,
 		private router: Router,
 		private store: Store
-	) {
+	) {}
+
+	ngOnInit(): void {
+		this.listTalks();
 		this.loadUser();
 
 		this.user$.subscribe((user) => {
@@ -40,13 +41,6 @@ export class TalksComponent implements OnInit, DoCheck {
 				this.listTalks();
 			}
 		});
-	}
-	ngDoCheck(): void {
-		Faether.replace();
-	}
-
-	ngOnInit(): void {
-		this.listTalks();
 	}
 
 	private loadUser(): void {
@@ -70,9 +64,15 @@ export class TalksComponent implements OnInit, DoCheck {
 	}
 
 	createUser(usernameToCreate: string): void {
-		this.userService.insertUser({ username: usernameToCreate }).subscribe((user): void => {
-			this.userService.saveInStorage(user);
-			this.setUser(user);
+		this.userPublicService.filterByUsername(usernameToCreate).subscribe((user) => {
+			if (user == null) {
+				this.userService.insertUser({ username: usernameToCreate }).subscribe((user): void => {
+					this.userService.saveInStorage(user);
+					this.setUser(user);
+				});
+			} else {
+				alert('Já existe um usuário com esse username');
+			}
 		});
 	}
 
@@ -126,7 +126,7 @@ export class TalksComponent implements OnInit, DoCheck {
 		this.store.dispatch(setUser({ user }));
 	}
 
-	listTalks(): void {
+	private listTalks(): void {
 		if (this.currentUser != null) {
 			this.userTalkService.filterByUserKey(this.currentUser?.key).subscribe((talkKeys) => {
 				this.userTalkClients = talkKeys;
