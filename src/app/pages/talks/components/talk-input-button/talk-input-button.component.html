@@ -1,6 +1,6 @@
 <div class="container">
     <input placeholder="{{placeholder}}" class="input" #input/>
     <button class="button" (click)="this.clickButton.emit(input.value)">
-        <i class="icon--center" [attr.data-feather]="icon"></i>
+        <i-feather [name]="icon"></i-feather>
     </button>
 </div>
