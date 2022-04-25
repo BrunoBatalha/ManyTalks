@@ -23,4 +23,4 @@ npm run start
 ```
 Abra uma guia normal e uma guia anônima e pode enviar as mensagens.
 
-`Atenção:` Você precisa dos dados de acesso ao Firebase.
+**Atenção:** Você precisa dos dados de acesso ao Firebase.
