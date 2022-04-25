@@ -1,27 +1,26 @@
 # ManyTalks
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
 
-## Development server
+Projeto de estudo utilizando as tecnologias:
+- Angular
+- Firebase
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Sobre
+ManyTalks é um chat onde o usuário precisa saber o username de outro usuário para entrar em contato.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Design
+Baseado em uma interface encontrada no [Bahance](https://www.behance.net/gallery/93230543/UI-UX-Chat-App-Neumorphism)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Produção
+[ManyTalks](https://many-talks.vercel.app/)
 
-## Running unit tests
+## Como testar sozinho?
+```cmd
+npm install
+npm run start
+```
+Abra uma guia normal e uma guia anônima e pode enviar as mensagens.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+`Atenção:` Você precisa dos dados de acesso ao Firebase.
