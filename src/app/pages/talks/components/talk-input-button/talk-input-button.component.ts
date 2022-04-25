@@ -9,6 +9,7 @@ import { FaetherIcon } from 'src/app/shared/utils';
 export class TalkInputButtonComponent implements DoCheck {
 	@Output() clickButton = new EventEmitter<string>();
 	@Input() icon!: string;
+	@Input() placeholder!: string;
 
 	ngDoCheck(): void {
 		FaetherIcon().replace();

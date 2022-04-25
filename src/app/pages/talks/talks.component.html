@@ -4,12 +4,12 @@
         <app-image-rounded srcImage="{{'https://avatars.dicebear.com/api/micah/'+currentUser?.username+currentUser?.key}}.svg"></app-image-rounded>   
         <h3 class="talk__text talk__text-margin">Welcome, {{currentUser?.username}}</h3>
     </div>
-   <app-talk-input-button icon="plus" (clickButton)="createTalk($event)"></app-talk-input-button>
+   <app-talk-input-button icon="plus" placeholder="Username to talk" (clickButton)="createTalk($event)"></app-talk-input-button>
 </div>
 
 <div *ngIf="!currentUser">
     <h3 class="talk__text">Hello, are you new here</h3>
-    <app-talk-input-button icon="check" (clickButton)="createUser($event)"></app-talk-input-button>
+    <app-talk-input-button icon="check" placeholder="What should we call you?" (clickButton)="createUser($event)"></app-talk-input-button>
 </div>
 
 <div  class="talk__list-wrapper">

@@ -1,5 +1,5 @@
 <div class="container">
-    <input placeholder="Username to talk" class="input" #input/>
+    <input placeholder="{{placeholder}}" class="input" #input/>
     <button class="button" (click)="this.clickButton.emit(input.value)">
         <i class="icon--center" [attr.data-feather]="icon"></i>
     </button>
