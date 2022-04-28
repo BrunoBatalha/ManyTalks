@@ -10,7 +10,7 @@ ManyTalks é um chat onde o usuário precisa saber o username de outro usuário 
 
 
 ## Design
-Baseado em uma interface encontrada no [Bahance](https://www.behance.net/gallery/93230543/UI-UX-Chat-App-Neumorphism).
+Baseado em uma interface encontrada no [Behance](https://www.behance.net/gallery/93230543/UI-UX-Chat-App-Neumorphism).
 
 
 ## Produção
