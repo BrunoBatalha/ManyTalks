@@ -1,7 +1,7 @@
 import { AngularFireDatabase, SnapshotAction } from '@angular/fire/compat/database';
 import firebase from 'firebase/compat/app';
-import { map, Observable } from 'rxjs';
-
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 export class BaseService<TEntity> {
 	private pathRoot: string = 'database';
 
@@ -44,10 +44,22 @@ export class BaseService<TEntity> {
 	}
 
 	protected filterByKey(path: string, key: string): Observable<TEntity[]> {
-		return this.database
-			.list(`${this.pathRoot}/${path}`, (ref) => ref.orderByKey().equalTo(key))
-			.valueChanges()
-			.pipe(map((snap) => snap as TEntity[]));
+		return new Observable((subscriber) => {
+			this.database
+				.list(`${this.pathRoot}/${path}`, (ref) => ref.orderByKey().equalTo(key))
+				.valueChanges()
+				.pipe(
+					map((snap) => {
+						return snap as TEntity[];
+					})
+				)
+				.subscribe({
+					next: (snaps) => {
+						subscriber.next(snaps);
+						subscriber.complete();
+					},
+				});
+		});
 	}
 
 	protected filterByPathAndOrderBy(path: string, orderBy: string): Observable<TEntity[]> {

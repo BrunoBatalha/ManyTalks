@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TalkRowComponent } from './contact-row.component';
-
+import { TalkRowComponent } from './talk-row.component';
 
 describe('ContactRowComponent', () => {
 	let component: TalkRowComponent;

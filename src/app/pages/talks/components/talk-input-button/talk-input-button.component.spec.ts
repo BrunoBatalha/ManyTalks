@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TalkInputButtonComponent } from './talk-input-button.component';
 
-
 describe('TalkInputButtonComponent', () => {
 	let component: TalkInputButtonComponent;
 	let fixture: ComponentFixture<TalkInputButtonComponent>;

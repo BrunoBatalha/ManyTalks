@@ -16,10 +16,11 @@ export class UserService extends BaseService<User> {
 	private usersPublicPath = 'users/public';
 	private userStorage = 'user';
 
-	private storeUser$: Observable<User | null> = this.store.select(selectLoadUser);
+	private storeUser$: Observable<User | null>;
 
 	constructor(database: AngularFireDatabase, private storageService: StorageService, private store: Store) {
 		super(database);
+		this.storeUser$ = this.store.select(selectLoadUser);
 	}
 
 	insertUser(user: User): Observable<User> {
@@ -35,7 +36,7 @@ export class UserService extends BaseService<User> {
 			};
 
 			this.updateMany(pathsToUpdate).then((): void => {
-				subscriber.next({ key: userKey, ...userPrivate });
+				subscriber.next({ ...userPrivate, key: userKey });
 			});
 		});
 	}

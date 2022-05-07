@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { TalkService } from './talk.service';
 
-
 describe('TalkService', () => {
 	let service: TalkService;
 

@@ -16,5 +16,6 @@
      // extension TsAutoReturnType
     "tsautoreturntype.inferArrowFunctionReturnType": true,
     "tsautoreturntype.inferFunctionReturnType": true,
-    "tsautoreturntype.inferMethodReturnType": true
+    "tsautoreturntype.inferMethodReturnType": true,
+    "livePreview.defaultPreviewPath": "/coverage/many-talks/index.html"
 }
