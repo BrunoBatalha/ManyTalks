@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { ContainerComponent } from './container.component';
 
 describe('ContainerComponent', () => {
@@ -19,5 +20,10 @@ describe('ContainerComponent', () => {
 
 	it('should create', () => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should contain div', () => {
+		const div = fixture.debugElement.query(By.css('div'));
+		expect(div).toBeTruthy();
 	});
 });

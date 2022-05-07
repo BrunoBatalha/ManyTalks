@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 export class InputMessageComponent implements OnInit {
 	@ViewChild('editable') refEditable: ElementRef | null = null;
 	@Output() inputMessage = new EventEmitter<string>();
-	@Input() value: string = '';
 	@Input() clearInput$: Observable<void> | null = null;
 
 	ngOnInit(): void {
@@ -19,7 +18,6 @@ export class InputMessageComponent implements OnInit {
 	}
 
 	onInputMessage($event: any): void {
-		this.value = $event.target.textContent;
 		this.inputMessage.emit($event.target.textContent);
 	}
 

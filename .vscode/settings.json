@@ -4,6 +4,7 @@
         "source.fixAll.eslint",
         "source.organizeImports",    
     ],
+    "files.autoSaveDelay": 5000,
     "[css]":{
         "editor.suggest.insertMode": "replace",
         "editor.formatOnSave": true,

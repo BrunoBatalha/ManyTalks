@@ -15,7 +15,6 @@ export class TalkInputButtonComponent implements DoCheck, OnInit {
 	}
 
 	ngDoCheck(): void {
-		console.log('este');
 		Faether.replace();
 	}
 }

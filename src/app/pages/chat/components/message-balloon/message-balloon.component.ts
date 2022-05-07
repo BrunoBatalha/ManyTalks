@@ -7,10 +7,8 @@ import { UserService } from 'src/app/services/user/user.service';
 	styleUrls: ['./message-balloon.component.css'],
 })
 export class MessageBalloonComponent implements OnInit {
-	@Input()
-	text: string = '';
-	@Input()
-	fromUserKey: string = '';
+	@Input() text: string = '';
+	@Input() fromUserKey: string = '';
 
 	styles: { isLoggedUser: boolean } = {
 		isLoggedUser: false,
