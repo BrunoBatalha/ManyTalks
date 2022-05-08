@@ -1,12 +1,10 @@
-import { TestBed } from '@angular/core/testing';
 import { BaseService } from './base.service';
 
 describe('BaseService', () => {
 	let service: BaseService<any>;
 
 	beforeEach(() => {
-		TestBed.configureTestingModule({});
-		service = TestBed.inject(BaseService);
+		service = new BaseService(jasmine.createSpyObj('AngularFirebaseDatabase', ['list', 'object']));
 	});
 
 	it('should be created', () => {

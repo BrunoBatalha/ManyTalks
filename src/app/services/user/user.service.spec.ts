@@ -26,6 +26,10 @@ describe('UserService', () => {
 		service = TestBed.inject(UserService);
 	});
 
+	it('should be created', () => {
+		expect(service).toBeTruthy();
+	});
+
 	it('#isLogged should return false', () => {
 		const isLogged = service.isLogged();
 
