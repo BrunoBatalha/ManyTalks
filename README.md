@@ -24,3 +24,6 @@ npm run start
 Abra uma guia normal e uma guia anônima e pode enviar as mensagens.
 
 **Atenção:** Você precisa dos dados de acesso ao Firebase.
+
+## Vídeo
+[Link](https://www.linkedin.com/posts/bruno-batalha-_angular-firebase-frontend-activity-6924685598498668544-8dMK?utm_source=share&utm_medium=member_desktop)
